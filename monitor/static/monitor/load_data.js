@@ -1,9 +1,13 @@
 var monitorApp = angular.module('monitorApp',[]);
 monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
+    $scope.boxPlot;
 
     // 基于准备好的dom，初始化echarts实例
     var batch_size_bar = echarts.init(document.getElementById('batch_size'));
     var KPI2_bar = echarts.init(document.getElementById('kpi2'));
+    var $boxPlot = echarts.init(document.getElementById('boxplot'));
+    var $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
+
     // var KPI3_bar = echarts.init(document.getElementById('kpi3'));
     // var KPI4_bar = echarts.init(document.getElementById('kpi4'));
     batch_size_bar.showLoading();
@@ -39,6 +43,12 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 legend: {
                     data:['Batch Size']
                 },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
 
                 xAxis: {
                     // data: ["test1","test2"]
@@ -61,6 +71,12 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 tooltip: {},
                 legend: {
                     data:['CNTR', '11t', '5t', '1t']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
                 },
                 xAxis: {
                     data: simulation_names
@@ -155,7 +171,140 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             // KPI3_bar.setOption(kpi3_option);
             // KPI4_bar.setOption(throughput_option);
         });
+        $http({
+            url: 'boxplot',
+            method: "GET",
+            params: {tp: 'gross'}
+        }).then(function(response){
+            $scope.boxPlot = response.data.simulations;
+
+            var data = [];
+            for (var seriesIndex = 2; seriesIndex < $scope.boxPlot.length; seriesIndex++) {
+                var current = $scope.boxPlot[seriesIndex];
+                var seriesData = [];
+                for (var i = 0; i < current.length; i += 1) {
+                    var cate = current[i];
+                    seriesData.push(cate);
+                }
+                data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+            }
+            var seriesList = []
+            for (var i=0;i< $scope.boxPlot[0].length;i++) {
+                seriesList.push(
+                    {
+                        name: $scope.boxPlot[0][i],
+                        type: 'boxplot',
+                        data: data[i].boxData,
+                    }
+                )
+            }
+            var option = {
+                title: {
+                    text: 'Gross Fill rate',
+                    left: 'center',
+                },
+                legend: {
+                    y: '10%',
+                    data: $scope.boxPlot[0]
+                },
+                tooltip: {
+                    trigger: 'item',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: $scope.boxPlot[1],
+                    boundaryGap: true,
+
+                    splitArea: {
+                        show: true
+                    },
+                },
+                yAxis: {
+                },
+                series: seriesList
+            };
+            $boxPlot.setOption(option);
+        });
+
+
+        $http({
+            url: 'boxplot',
+            method: "GET",
+            params: {tp: 'net'}
+        }).then(function(response){
+            $scope.boxPlot2 = response.data.simulations;
+
+            var data = [];
+            for (var seriesIndex = 2; seriesIndex < $scope.boxPlot2.length; seriesIndex++) {
+                var current = $scope.boxPlot2[seriesIndex];
+                var seriesData = [];
+                for (var i = 0; i < current.length; i += 1) {
+                    var cate = current[i];
+                    seriesData.push(cate);
+                }
+                data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+            }
+            var seriesList = []
+            for (var i=0;i< $scope.boxPlot2[0].length;i++) {
+                seriesList.push(
+                    {
+                        name: $scope.boxPlot2[0][i],
+                        type: 'boxplot',
+                        data: data[i].boxData,
+                    }
+                )
+            }
+            var option = {
+                title: {
+                    text: 'Net Fill rate',
+                    left: 'center',
+                },
+                legend: {
+                    y: '10%',
+                    data: $scope.boxPlot2[0]
+                },
+                tooltip: {
+                    trigger: 'item',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: $scope.boxPlot2[1],
+                    boundaryGap: true,
+
+                    splitArea: {
+                        show: true
+                    },
+                },
+                yAxis: {
+                },
+                series: seriesList
+            };
+
+            $boxplot_net.setOption(option);
+        });
+
+
     }, 0);
+
+    window.aaa = $scope;
 
     // $scope.simulations = [{"test_id": "test2", "description": "simulation with new batch creation algorithm", "data_end_time": "2017-06-02 08:00:00", "kpis": [{"simulation": "test2", "kpi_value": "0.400000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "KP2"}, {"simulation": "test2", "kpi_value": "100.000000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "KPI3"}, {"simulation": "test2", "kpi_value": "70.000000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "batch_size"}], "created_at": "2017-06-12 18:07:03", "data_start_time": "2017-06-01 08:00:00"}, {"test_id": "test1", "description": "using the original settings", "data_end_time": "2017-06-02 08:00:00", "kpis": [{"simulation": "test1", "kpi_value": "0.830000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "KPI2"}, {"simulation": "test1", "kpi_value": "100.000000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "KPI3"}, {"simulation": "test1", "kpi_value": "20.300000", "kpi_datetime": "2017-06-02 08:00:00", "kpi_name": "batch_size"}], "created_at": "2017-06-12 18:02:25", "data_start_time": "2017-06-01 08:00:00"}]
 

@@ -103,26 +103,62 @@ def read_csv_json(request):
 
 
 def read_csv_boxplot(request):
+    tp = request.GET.get('tp', 'gross')
+    fromid = request.GET.get('fromid', '')
+    toid = request.GET.get('toid', '')
     file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
     df = pd.read_csv(file_path)
+    if fromid != '':
+        df = df.loc[df['fromid'] == int(fromid)]
+    if toid != '':
+        df = df.loc[df['toid'] == int(toid)]
     data = [];
-    for a in df.scenorio.unique():
-        seriesData = [];
-        for b in ['CNTR','11t','5t','1t']:
-            cate = list(df.gross)
-            seriesData.append(cate);
+    trucks = sorted(df.truck.unique())
+    data.append(trucks)
+    scenorio = list(map(lambda x: int(x), sorted(df.scenorio.unique())))
+    data.append(scenorio)
+    for a in trucks:
+        df2 = df.loc[df['truck'] == a]
+        seriesData = []
+        for b in scenorio:
+            df3 = df2.loc[df['scenorio'] == b]
+            cate = list(df3[tp])
+            seriesData.append(cate)
         data.append(seriesData)
+
     return HttpResponse(json.dumps({"simulations": data}, cls=DjangoJSONEncoder))
 
 
 def read_csv_json_drill(request):
     file_path = os.path.join(BASE_DIR, 'drill.csv')
+    fromid = request.GET.get('fromid', '')
+    toid = request.GET.get('toid', '')
     df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 'TRUCKS', 'CNTR', 't11', 't5', 't1',
                                                      'CNTR_gross_fr', 't11_gross_fr',
                                                           't5_gross_fr', 't1_gross_fr', 'CNTR_net_fr', 't11_net_fr',
-                                                     't5_net_fr', 't1_net_fr'])
+                                                     't5_net_fr', 't1_net_fr', 'fromid', 'toid'])
+    if fromid != '':
+        df = df.loc[df['fromid'] == int(fromid)]
+    if toid != '':
+        df = df.loc[df['toid'] == int(toid)]
+
     output = df.to_dict(orient='records')
     return HttpResponse(json.dumps({"simulations": output}, cls=DjangoJSONEncoder))
+
+
+def from_to(request):
+    tpid = request.GET.get('tpid', 'fromid')
+    file_path = os.path.join(BASE_DIR, 'drill.csv')
+    file_path2 = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path3 = os.path.join(BASE_DIR, 'idmapping.csv')
+    df2 = pd.read_csv(file_path2)
+    df = pd.read_csv(file_path)
+    output = sorted(map(lambda x:int(x),df[tpid].append(df2[tpid]).unique()))
+    op = pd.DataFrame(output,columns=['id'])
+    df_map = pd.read_csv(file_path3)
+    idmap = op.merge(df_map,on='id')
+    return HttpResponse(json.dumps({"workplaces": idmap.to_dict(orient='records')}, cls=DjangoJSONEncoder))
+
 
 
 def index(request):
