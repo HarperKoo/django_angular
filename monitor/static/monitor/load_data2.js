@@ -6,9 +6,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         params: {tpid: 'fromid' }
     }).then(function (response) {
         $scope.list1 = response.data.workplaces;
-        $scope.val1 = $scope.list1[0].id;
-        console.log('aaalist1',$scope.list1)
-        console.log('aaalist1',$scope.val1,$scope.val1)
+        $scope.val1 = String($scope.list1[0].id);
+        $scope.doRefresh();
     });
     $http({
         url: 'workplaces',
@@ -16,13 +15,14 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         params: {tpid: 'toid' }
     }).then(function (response) {
         $scope.list2 = response.data.workplaces;
-        $scope.val2 = $scope.list2[0].id;
+        $scope.val2 = String($scope.list2[0].id);
+        $scope.doRefresh();
     });
 
 
     console.log('>>>>', $scope);
     $scope.doRefresh = function() {
-
+        if (!$scope.val1 || !$scope.val2) return;
 
         console.log('Current select:', $scope.val1, $scope.val2);
 
@@ -85,7 +85,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     },
                     yAxis: {},
                     series: [{
-                        name: 'batch_size',
+                        name: 'cost',
                         type: 'bar',
                         data: batch_size
                         // data: [40.0000,20.3,70.0000]
@@ -216,7 +216,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         var cate = current[i];
                         seriesData.push(cate);
                     }
-                    data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+                    data.push(echarts.dataTool.prepareBoxplotData(seriesData,{boundIQR: 'none'}));
                 }
                 var seriesList = []
                 for (var i=0;i< $scope.boxPlot[0].length;i++) {
@@ -283,7 +283,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         var cate = current[i];
                         seriesData.push(cate);
                     }
-                    data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+                    data.push(echarts.dataTool.prepareBoxplotData(seriesData,{boundIQR: 'none'}));
                 }
                 var seriesList = []
                 for (var i=0;i< $scope.boxPlot2[0].length;i++) {
@@ -335,8 +335,6 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             });
         }, 0);
     }
-
-    $scope.doRefresh();
 
     window.aaa = $scope;
     

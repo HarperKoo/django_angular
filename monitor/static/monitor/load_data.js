@@ -56,7 +56,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 },
                 yAxis: {},
                 series: [{
-                    name: 'batch_size',
+                    name: 'cost',
                     type: 'bar',
                     data: batch_size
                     // data: [40.0000,20.3,70.0000]
@@ -186,7 +186,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     var cate = current[i];
                     seriesData.push(cate);
                 }
-                data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+                data.push(echarts.dataTool.prepareBoxplotData(seriesData,{boundIQR: 'none'}));
             }
             var seriesList = []
             for (var i=0;i< $scope.boxPlot[0].length;i++) {
@@ -251,7 +251,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     var cate = current[i];
                     seriesData.push(cate);
                 }
-                data.push(echarts.dataTool.prepareBoxplotData(seriesData));
+                data.push(echarts.dataTool.prepareBoxplotData(seriesData,{boundIQR: 'none'}));
             }
             var seriesList = []
             for (var i=0;i< $scope.boxPlot2[0].length;i++) {
