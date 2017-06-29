@@ -29,7 +29,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         // 基于准备好的dom，初始化echarts实例
         var batch_size_bar = echarts.init(document.getElementById('batch_size'));
         var KPI2_bar = echarts.init(document.getElementById('kpi2'));
-
+        var $boxPlot = echarts.init(document.getElementById('boxplot'));
         var $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
 
         // var KPI3_bar = echarts.init(document.getElementById('kpi3'));
@@ -206,7 +206,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 method: "GET",
                 params: {tp: 'gross', fromid:$scope.val1, toid:$scope.val2}
             }).then(function(response){
-                var $boxPlot = echarts.init(document.getElementById('boxplot'));
+                $boxPlot.dispose()
+                $boxPlot = echarts.init(document.getElementById('boxplot'));
                 $scope.boxPlot = response.data.simulations;
 
                 var data = [];
@@ -261,41 +262,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 };
                 console.log('seriesList',seriesList)
 
-                if(seriesList.length) {
                     console.log('seriesList.length', seriesList.length)
                     $boxPlot.setOption(option);
-                }
-                else {
-                    console.log('seriesList.length2', seriesList.length)
-                    $boxPlot.setOption({
-                        title: {
-                            text: 'LALALALAALALALALALs',
-                            left: 'center',
-                        },
-                        legend: {
-                            y: '10%',
-                            // data: $scope.boxPlot[0]
-                        },
-                        tooltip: {
-                            trigger: 'item',
-                            axisPointer: {
-                                type: 'shadow'
-                            }
-                        },
-                        grid: {
-                            left: '3%',
-                            right: '4%',
-                            bottom: '3%',
-                            containLabel: true
-                        },
-                        xAxis: {
-                            data: [],
-                        },
-                        yAxis: {
-                        },
-                        series: []
-                    });
-                }
             });
 
 
@@ -304,6 +272,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 method: "GET",
                 params: {tp: 'net', fromid:$scope.val1, toid:$scope.val2}
             }).then(function(response){
+                $boxplot_net.dispose()
+                $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
                 $scope.boxPlot2 = response.data.simulations;
 
                 var data = [];
@@ -355,8 +325,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     },
                     series: seriesList
                 };
-                if(seriesList.length)
-                    $boxplot_net.setOption(option);
+                $boxplot_net.setOption(option);
             });
         }, 0);
     }

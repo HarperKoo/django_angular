@@ -176,6 +176,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             method: "GET",
             params: {tp: 'gross'}
         }).then(function(response){
+            $boxPlot.dispose()
+            $boxPlot = echarts.init(document.getElementById('boxplot'));
             $scope.boxPlot = response.data.simulations;
 
             var data = [];
@@ -241,6 +243,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             method: "GET",
             params: {tp: 'net'}
         }).then(function(response){
+            $boxplot_net.dispose()
+            $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
             $scope.boxPlot2 = response.data.simulations;
 
             var data = [];
