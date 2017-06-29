@@ -29,7 +29,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         // 基于准备好的dom，初始化echarts实例
         var batch_size_bar = echarts.init(document.getElementById('batch_size'));
         var KPI2_bar = echarts.init(document.getElementById('kpi2'));
-        var $boxPlot = echarts.init(document.getElementById('boxplot'));
+
         var $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
 
         // var KPI3_bar = echarts.init(document.getElementById('kpi3'));
@@ -206,6 +206,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 method: "GET",
                 params: {tp: 'gross', fromid:$scope.val1, toid:$scope.val2}
             }).then(function(response){
+                var $boxPlot = echarts.init(document.getElementById('boxplot'));
                 $scope.boxPlot = response.data.simulations;
 
                 var data = [];
@@ -228,6 +229,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         }
                     )
                 }
+                console.log(data,seriesList)
 
                 var option = {
                     title: {
@@ -251,20 +253,49 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         containLabel: true
                     },
                     xAxis: {
-                        type: 'category',
                         data: $scope.boxPlot[1],
-                        boundaryGap: true,
-
-                        splitArea: {
-                            show: true
-                        },
                     },
                     yAxis: {
                     },
                     series: seriesList
                 };
+                console.log('seriesList',seriesList)
 
-                $boxPlot.setOption(option);
+                if(seriesList.length) {
+                    console.log('seriesList.length', seriesList.length)
+                    $boxPlot.setOption(option);
+                }
+                else {
+                    console.log('seriesList.length2', seriesList.length)
+                    $boxPlot.setOption({
+                        title: {
+                            text: 'LALALALAALALALALALs',
+                            left: 'center',
+                        },
+                        legend: {
+                            y: '10%',
+                            // data: $scope.boxPlot[0]
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            data: [],
+                        },
+                        yAxis: {
+                        },
+                        series: []
+                    });
+                }
             });
 
 
@@ -318,20 +349,14 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         containLabel: true
                     },
                     xAxis: {
-                        type: 'category',
                         data: $scope.boxPlot2[1],
-                        boundaryGap: true,
-
-                        splitArea: {
-                            show: true
-                        },
                     },
                     yAxis: {
                     },
                     series: seriesList
                 };
-
-                $boxplot_net.setOption(option);
+                if(seriesList.length)
+                    $boxplot_net.setOption(option);
             });
         }, 0);
     }
