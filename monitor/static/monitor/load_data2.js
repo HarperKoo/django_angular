@@ -15,7 +15,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         params: {tpid: 'toid' }
     }).then(function (response) {
         $scope.list2 = response.data.workplaces;
-        $scope.val2 = String($scope.list2[0].id);
+        $scope.val2 = String($scope.list2[1].id);
         $scope.doRefresh();
     });
 
