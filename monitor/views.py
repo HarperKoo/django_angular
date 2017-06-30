@@ -59,7 +59,8 @@
 
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
-from .models import SimuSummary, SimuKPISummary
+from .models import SimuSummary, SimuKPISummary, BoxPlot
+from django.db import transaction
 from collections import defaultdict 
 import json
 from datetime import timedelta, datetime, tzinfo
@@ -125,8 +126,11 @@ def read_csv_boxplot(request):
             cate = list(df3[tp])
             seriesData.append(cate)
         data.append(seriesData)
-
     return HttpResponse(json.dumps({"simulations": data}, cls=DjangoJSONEncoder))
+
+
+def read_boxplot(request):
+    boxplotList = BoxPlot.objects.all()
 
 
 def read_csv_json_drill(request):
@@ -160,6 +164,16 @@ def from_to(request):
     return HttpResponse(json.dumps({"workplaces": idmap.to_dict(orient='records')}, cls=DjangoJSONEncoder))
 
 
+def get_conf(request):
+    file_path = os.path.join(BASE_DIR, 'truckcapacity.csv')
+    file_path2 = os.path.join(BASE_DIR, 'truckutil.csv')
+    file_path3 = os.path.join(BASE_DIR, 'truckconf.csv')
+    df = pd.read_csv(file_path)
+    df2 = pd.read_csv(file_path2)
+    df3 = pd.read_csv(file_path3)
+    return HttpResponse(json.dumps({"truckcapacity": df.to_dict(orient='records'), "truckutil": df2.to_dict(
+        orient='records'), "truckconf": df3.to_dict(orient='records')}, cls=DjangoJSONEncoder))
+
 
 def index(request):
     return render_to_response('monitor/main.html')
@@ -167,6 +181,10 @@ def index(request):
 
 def index2(request):
     return render_to_response('monitor/main2.html')
+
+
+def index3(request):
+    return render_to_response('monitor/main3.html')
 
 
 @csrf_exempt

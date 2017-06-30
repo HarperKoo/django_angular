@@ -52,7 +52,13 @@ class SimuKPISummary(models. Model):
         return self.simulation.test_id + ' ' + self.kpi_name
 
 
-
+class BoxPlot(models.Model):
+    scenorio = models.CharField(max_length=100)
+    truck = models.CharField(max_length=100)
+    gross = models.DecimalField(max_digits=18, decimal_places=6, default=0.0)
+    net = models.DecimalField(max_digits=18, decimal_places=6, default=0.0)
+    fromid = models.DecimalField(max_digits=18, decimal_places=6, default=0)
+    toid = models.DecimalField(max_digits=18, decimal_places=6, default=0)
 
 
 
