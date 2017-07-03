@@ -130,6 +130,59 @@ def read_csv_boxplot(request):
     return HttpResponse(json.dumps({"simulations": data}, cls=DjangoJSONEncoder))
 
 
+def draw_network(request):
+    scenorio = request.GET.get('scenorio', 'S1-1')
+    file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path2 = os.path.join(BASE_DIR, 'idmapping.csv')
+    df2 = pd.read_csv(file_path2)
+    df = pd.read_csv(file_path)
+    out1 = df.merge(df2,left_on='fromid',right_on='id').rename(index=str, columns={"name": "fromname","type":"fromtype"})
+    out2 = out1.merge(df2,left_on='toid',right_on='id').rename(index=str, columns={"name": "toname","type":"totype"})
+    out2 = out2[['truck','fromid','toid','fromname','toname','fromtype','totype','scenorio','gross','net']]
+    dfs11 = out2.loc[out2['scenorio'] == scenorio]
+    dfs11 = dfs11.groupby(['fromid','toid','fromtype','totype','fromname','toname']).agg({
+     'scenorio':'count'}).reset_index()
+    dfs11['fromid'] = dfs11['fromid'].apply(lambda x: int(x))
+    dfs11['toid'] = dfs11['toid'].apply(lambda x: int(x))
+    dfs11_from = dfs11.groupby(['fromid','fromname']).agg({'scenorio':'count'}).reset_index()[['fromid','fromname']]
+    dfs11_to = dfs11.groupby(['toid','toname']).agg({'scenorio':'count'}).reset_index()[['toid','toname']]
+
+    dfs11_from_fc = dfs11_from.loc[~dfs11_from['fromid'].isin(dfs11_to['toid'])]
+    dfs11_from_fc = dfs11_from_fc.rename(index=str, columns={"fromid": "id","fromname": "label"})
+    dfs11_from_fc['x'] = 0
+    dfs11_from_fc['y'] = dfs11_from_fc.groupby(['x']).cumcount()*10+40
+    dfs11_from_fc['size'] = 3
+
+    dfs11_from_hub = dfs11_from.loc[dfs11_from['fromid'].isin(dfs11_to['toid'])]
+    dfs11_from_hub = dfs11_from_hub.rename(index=str, columns={"fromid": "id","fromname": "label"})
+    dfs11_from_hub['x'] = 50
+    dfs11_from_hub['y'] = dfs11_from_hub.groupby(['x']).cumcount()*10+1
+    dfs11_from_hub['size'] = 3
+
+    dfs11_from2 = dfs11_from_fc.to_dict(orient='records')
+
+    dfs11_from2.extend(dfs11_from_hub.to_dict(orient='records'))
+
+    dfs11_to = dfs11_to.loc[~dfs11_to['toid'].isin(dfs11_from['fromid'])]
+    dfs11_to = dfs11_to.rename(index=str, columns={"toid": "id","toname": "label"})
+    dfs11_to['x'] = 100
+    dfs11_to['y'] = dfs11_to.groupby(['x']).cumcount()*3+1
+    dfs11_to['size'] = 3
+    dfs11_to2 = dfs11_to.to_dict(orient='records')
+
+    dfs11_from2.extend(dfs11_to2)
+
+    edges = dfs11[['fromid','toid','scenorio']]
+    edges = edges.rename(index=str, columns={"fromid": "source","toid": "target","scenorio": "size"})
+    edges['index'] = 1
+    edges['id'] = edges.groupby(['index']).cumcount()+1
+    edges['id'] = edges['id'].apply(lambda x: 'e'+repr(x))
+    edges = edges.drop('index', 1)
+    edges['size'] = edges['size'].apply(lambda x: np.log(x)/3)
+    edges_dict = edges.to_dict(orient='records')
+    return HttpResponse(json.dumps({"nodes": dfs11_from2, "edges":edges_dict}, cls=DjangoJSONEncoder))
+
+
 def read_csv_json_drill(request):
     file_path = os.path.join(BASE_DIR, 'drill.csv')
     fromid = request.GET.get('fromid', '')

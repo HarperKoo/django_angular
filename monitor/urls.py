@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^network$', views.draw_network, name='network'),
     url(r'^drill/$', views.index2, name='index2'),
     url(r'^config/$', views.index3, name='index3'),
     url(r'^update/$', views.set_simulations, name='update'),

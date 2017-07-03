@@ -8,6 +8,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
     var $boxPlot = echarts.init(document.getElementById('boxplot'));
     var $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
 
+
     // var KPI3_bar = echarts.init(document.getElementById('kpi3'));
     // var KPI4_bar = echarts.init(document.getElementById('kpi4'));
     batch_size_bar.showLoading();
@@ -301,6 +302,44 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             $boxplot_net.setOption(option);
         });
 
+
+        $http({
+            url: 'network',
+            method: "GET",
+            params: {scenorio: 'S1-1'}
+        }).then(function(response){
+            $scope.g = response.data;
+            // Instantiate sigma:
+            new sigma({
+                graph: $scope.g,
+                container: 'sigmas11',
+                settings: {
+                    minEdgeSize: 0.1,
+                    maxEdgeSize: 3,
+                    defaultNodeColor: '#ec5148'
+                }
+
+            });
+        });
+
+        $http({
+            url: 'network',
+            method: "GET",
+            params: {scenorio: 'S1-2'}
+        }).then(function(response){
+            $scope.g = response.data;
+            // Instantiate sigma:
+            new sigma({
+                graph: $scope.g,
+                container: 'sigmas12',
+                settings: {
+                    minEdgeSize: 0.1,
+                    maxEdgeSize: 3,
+                    defaultNodeColor: '#ec5148'
+                }
+
+            });
+        });
 
     }, 0);
 
