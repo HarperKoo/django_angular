@@ -7,20 +7,29 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
     }).then(function (response) {
         $scope.list1 = response.data.workplaces;
         $scope.val1 = String($scope.list1[0].id);
-        $scope.doRefresh();
-    });
-    $http({
-        url: 'workplaces',
-        method: "GET",
-        params: {tpid: 'toid' }
-    }).then(function (response) {
-        $scope.list2 = response.data.workplaces;
-        $scope.val2 = String($scope.list2[1].id);
-        $scope.doRefresh();
+        // $scope.val2setDoRefresh()
+        $scope.val2set();
     });
 
+    $scope.val2set = function () {
+        if (!$scope.val1) return;
+        console.log('val2set', $scope.val1)
+        $http({
+            url: 'workplaces',
+            method: "GET",
+            params: {tpid: 'toid', fromid:$scope.val1}
+        }).then(function (response) {
+            console.log('toid',$scope.val1)
+            $scope.list2 = response.data.workplaces;
+            $scope.val2 = String($scope.list2[0].id);
+            $scope.doRefresh();
+        });
+    }
 
-    console.log('>>>>', $scope);
+    $scope.val2setDoRefresh = function () {
+        $scope.val2set();
+        $scope.doRefresh();
+    }
     $scope.doRefresh = function() {
         if (!$scope.val1 || !$scope.val2) return;
 

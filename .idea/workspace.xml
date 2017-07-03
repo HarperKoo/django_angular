@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="52e40997-88ad-4ee8-a41a-b5d13b7b8b77" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/templates/monitor/main3.html" afterPath="$PROJECT_DIR$/monitor/templates/monitor/main3.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/pandas_json.ipynb" afterPath="$PROJECT_DIR$/monitor/pandas_json.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/static/monitor/load_data2.js" afterPath="$PROJECT_DIR$/monitor/static/monitor/load_data2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/templates/monitor/main2.html" afterPath="$PROJECT_DIR$/monitor/templates/monitor/main2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monitor/views.py" afterPath="$PROJECT_DIR$/monitor/views.py" />
     </list>
     <ignored path="sim_monitor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,12 +34,12 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="166" column="12" selection-start-line="166" selection-start-column="4" selection-end-line="166" selection-end-column="12" />
+            <state relative-caret-position="373">
+              <caret line="154" column="36" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="false" />
                 <element signature="e#1582#1636#0" expanded="true" />
-                <element signature="e#7433#8025#0" expanded="false" />
+                <element signature="e#7702#8294#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -86,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main3.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main3.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="96" column="58" selection-start-line="96" selection-start-column="58" selection-end-line="96" selection-end-column="58" />
+            <state relative-caret-position="960">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -130,8 +133,8 @@
       <file leaf-file-name="main2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="53" column="63" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="63" />
+            <state relative-caret-position="855">
+              <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -142,22 +145,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="load_data2.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="load_data2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/monitor/static/monitor/load_data2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="315">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
               <folding>
-                <element signature="e#1525#1672#0" expanded="false" />
-                <element signature="e#3433#4727#0" expanded="false" />
-                <element signature="e#4795#5351#0" expanded="false" />
-                <element signature="e#5393#6703#0" expanded="false" />
-                <element signature="e#7649#8053#0" expanded="false" />
-                <element signature="e#8152#8434#0" expanded="false" />
-                <element signature="e#8510#9405#0" expanded="false" />
-                <element signature="e#10108#10513#0" expanded="false" />
-                <element signature="e#10613#10896#0" expanded="false" />
-                <marker date="1498724561000" expanded="false" signature="10927:11822" ph="{&quot;series&quot;: seriesList...}" />
+                <element signature="e#1849#1996#0" expanded="false" />
+                <element signature="e#2082#7472#0" expanded="false" />
+                <element signature="e#3757#5051#0" expanded="false" />
+                <element signature="e#5119#5675#0" expanded="false" />
+                <element signature="e#5717#7027#0" expanded="false" />
+                <element signature="e#7494#7648#0" expanded="false" />
+                <element signature="e#7973#8377#0" expanded="false" />
+                <element signature="e#8476#8758#0" expanded="false" />
+                <element signature="e#8834#9729#0" expanded="false" />
+                <element signature="e#9941#10093#0" expanded="false" />
+                <element signature="e#10432#10837#0" expanded="false" />
+                <element signature="e#10937#11220#0" expanded="false" />
+                <marker date="1499060307000" expanded="false" signature="11251:12146" ph="{&quot;series&quot;: seriesList...}" />
               </folding>
             </state>
           </provider>
@@ -195,15 +201,15 @@
         <option value="$PROJECT_DIR$/monitor/static/monitor/dataTool.min.js" />
         <option value="$PROJECT_DIR$/monitor/static/monitor/customized.css" />
         <option value="$PROJECT_DIR$/monitor/static/monitor/load_data.js" />
-        <option value="$PROJECT_DIR$/monitor/static/monitor/load_data2.js" />
         <option value="$PROJECT_DIR$/sim_monitor/settings.py" />
         <option value="$PROJECT_DIR$/monitor/models.py" />
         <option value="$PROJECT_DIR$/monitor/templates/monitor/main.html" />
-        <option value="$PROJECT_DIR$/monitor/templates/monitor/main2.html" />
-        <option value="$PROJECT_DIR$/monitor/views.py" />
         <option value="$PROJECT_DIR$/monitor/urls.py" />
         <option value="$PROJECT_DIR$/monitor/static/monitor/load_data3.js" />
         <option value="$PROJECT_DIR$/monitor/templates/monitor/main3.html" />
+        <option value="$PROJECT_DIR$/monitor/views.py" />
+        <option value="$PROJECT_DIR$/monitor/templates/monitor/main2.html" />
+        <option value="$PROJECT_DIR$/monitor/static/monitor/load_data2.js" />
       </list>
     </option>
   </component>
@@ -1003,12 +1009,12 @@
       <option name="presentableId" value="Default" />
       <updated>1498450038820</updated>
       <workItem from="1498450044969" duration="53685000" />
-      <workItem from="1498700897161" duration="20182000" />
+      <workItem from="1498700897161" duration="25902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73867000" />
+    <option name="totallyTimeSpent" value="79587000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="0" width="1920" height="1080" extended-state="0" />
@@ -1066,7 +1072,7 @@
           <folding>
             <element signature="n#!!doc" expanded="false" />
             <element signature="e#1582#1636#0" expanded="true" />
-            <element signature="e#7433#8025#0" expanded="false" />
+            <element signature="e#7702#8294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1184,29 +1190,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/static/monitor/load_data2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding>
-            <element signature="e#1525#1672#0" expanded="false" />
-            <element signature="e#3433#4727#0" expanded="false" />
-            <element signature="e#4795#5351#0" expanded="false" />
-            <element signature="e#5393#6703#0" expanded="false" />
-            <element signature="e#7649#8053#0" expanded="false" />
-            <element signature="e#8152#8434#0" expanded="false" />
-            <element signature="e#8510#9405#0" expanded="false" />
-            <element signature="e#10108#10513#0" expanded="false" />
-            <element signature="e#10613#10896#0" expanded="false" />
-            <marker date="1498724561000" expanded="false" signature="10927:11822" ph="{&quot;series&quot;: seriesList...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/monitor/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
           <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="44" column="58" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="58" />
+          <folding>
+            <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sim_monitor/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/monitor/static/monitor/load_data3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="54" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -1223,36 +1251,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="44" column="58" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="58" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="166" column="12" selection-start-line="166" selection-start-column="4" selection-end-line="166" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#1582#1636#0" expanded="true" />
-            <element signature="e#7433#8025#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sim_monitor/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/monitor/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1263,18 +1261,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/static/monitor/load_data3.js">
+    <entry file="file://$PROJECT_DIR$/monitor/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="373">
+          <caret line="154" column="36" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#1582#1636#0" expanded="true" />
+            <element signature="e#7702#8294#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="53" column="63" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="63" />
+        <state relative-caret-position="855">
+          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -1284,17 +1286,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/monitor/templates/monitor/main3.html">
+    <entry file="file://$PROJECT_DIR$/monitor/static/monitor/load_data2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="96" column="58" selection-start-line="96" selection-start-column="58" selection-end-line="96" selection-end-column="58" />
+        <state relative-caret-position="315">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#4;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#6;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#1849#1996#0" expanded="false" />
+            <element signature="e#2082#7472#0" expanded="false" />
+            <element signature="e#3757#5051#0" expanded="false" />
+            <element signature="e#5119#5675#0" expanded="false" />
+            <element signature="e#5717#7027#0" expanded="false" />
+            <element signature="e#7494#7648#0" expanded="false" />
+            <element signature="e#7973#8377#0" expanded="false" />
+            <element signature="e#8476#8758#0" expanded="false" />
+            <element signature="e#8834#9729#0" expanded="false" />
+            <element signature="e#9941#10093#0" expanded="false" />
+            <element signature="e#10432#10837#0" expanded="false" />
+            <element signature="e#10937#11220#0" expanded="false" />
+            <marker date="1499060307000" expanded="false" signature="11251:12146" ph="{&quot;series&quot;: seriesList...}" />
           </folding>
         </state>
       </provider>

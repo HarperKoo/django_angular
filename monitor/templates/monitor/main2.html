@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row row_line" style="padding:10px">
             <label class="input_label" for="from">FROM </label>
-            <select class="input_form" id="from" ng-model="val1" ng-change="doRefresh()">
+            <select class="input_form" id="from" ng-model="val1" ng-change="val2set()">
                 <option ng-repeat="val in list1 track by $index" value="{{val.id}}">
                     {{val.name}}
                 </option>
