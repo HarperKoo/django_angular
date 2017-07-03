@@ -116,7 +116,8 @@ def read_csv_boxplot(request):
     data = []
     trucks = sorted(df.truck.unique())
     data.append(trucks)
-    scenorio = list(map(lambda x: int(x), sorted(df.scenorio.unique())))
+    # scenorio = list(map(lambda x: int(x), sorted(df.scenorio.unique())))
+    scenorio = sorted(df.scenorio.unique())
     data.append(scenorio)
     for a in trucks:
         df2 = df.loc[df['truck'] == a]
@@ -137,7 +138,7 @@ def read_csv_json_drill(request):
     file_path = os.path.join(BASE_DIR, 'drill.csv')
     fromid = request.GET.get('fromid', '')
     toid = request.GET.get('toid', '')
-    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 'TRUCKS', 'CNTR', 't11', 't5', 't1',
+    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'COST', 'CNTR', 't11', 't5', 't1',
                                                      'CNTR_gross_fr', 't11_gross_fr',
                                                           't5_gross_fr', 't1_gross_fr', 'CNTR_net_fr', 't11_net_fr',
                                                      't5_net_fr', 't1_net_fr', 'fromid', 'toid'])
