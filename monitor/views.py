@@ -95,7 +95,7 @@ def get_simulations(request):
 
 def read_csv_json(request):
     file_path = os.path.join(BASE_DIR, 'summary.csv')
-    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 't11', 't5', 't1',
+    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 'COSTDE','t11', 't5', 't1',
                                                      't11_gross_fr',
                                                      't5_gross_fr', 't1_gross_fr',  't11_net_fr',
                                                      't5_net_fr', 't1_net_fr'])

@@ -1,5 +1,5 @@
-ID,Description,#of unique shipments,cost,#11t,#5t,#1t,11t truck gross fill rate,5t truck gross fill rate,1t truck gross fill rate,11t truck net fill rate,5t truck net fill rate,1t truck net fill rate
-Actual,Actual,7776959,1466168700,9605,273,73,54.86%,66.12%,213.45%,36.35%,40.64%,142.50%
-S1-1,S1- all 11T truck & not exchange',7776959,1479058500,10046,-,-,50.84%,-,-,34.53%,-,-
-S1-2,S2- all 11T truck & move Top 20000',7776959,1405075700,9908,0,0,51.47%,-,-,34.95%,-,-
-S1-3,S3- economic choice from 11t/5t/1t truck & move Top 20000',7776959,1330943400,8293,1100,515,60.20%,19.78%,19.19%,41.03%,11.96%,10.82%
+ID,Description,#of unique shipments,cost,cost decrease,#11t,#5t,#1t,11t truck gross fill rate,5t truck gross fill rate,1t truck gross fill rate,11t truck net fill rate,5t truck net fill rate,1t truck net fill rate
+Actual,Actual,7776959,1466168700,-,9605,273,73,54.86%,66.12%,213.45%,36.35%,40.64%,142.50%
+S1-1,S1- all 11T truck & not exchange',7776959,1479058500,-,10046,-,-,50.84%,-,-,34.53%,-,-
+S1-2,S2- all 11T truck & move Top 20000',7776959,1405075700,↓  5%,9908,0,0,51.47%,-,-,34.95%,-,-
+S1-3,S3- economic choice from 11t/5t/1t truck & move Top 20000',7776959,1330943400,↓  10%,8293,1100,515,60.20%,19.78%,19.19%,41.03%,11.96%,10.82%
