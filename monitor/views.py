@@ -155,8 +155,13 @@ def draw_network(request):
 
     dfs11_from_hub = dfs11_from.loc[dfs11_from['fromid'].isin(dfs11_to['toid'])]
     dfs11_from_hub = dfs11_from_hub.rename(index=str, columns={"fromid": "id","fromname": "label"})
-    dfs11_from_hub['x'] = 50
-    dfs11_from_hub['y'] = dfs11_from_hub.groupby(['x']).cumcount()*10+1
+    dfs11_from_hub['index'] = 1
+    # dfs11_from_hub['x'] = np.random.randint(2,3, size=len(dfs11_from_hub))
+    dfs11_from_hub['x'] = [1,3,3,1]
+    dfs11_from_hub['x'] = dfs11_from_hub['x'].apply(lambda x: x*15+10)
+    # dfs11_from_hub['x'] = dfs11_from_hub.groupby(['index']).cumcount()*15+10
+    dfs11_from_hub['y'] = dfs11_from_hub.groupby(['index']).cumcount()*40+1
+    dfs11_from_hub = dfs11_from_hub.drop('index',1)
     dfs11_from_hub['size'] = 3
 
     dfs11_from2 = dfs11_from_fc.to_dict(orient='records')
