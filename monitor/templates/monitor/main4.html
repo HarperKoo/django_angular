@@ -9,7 +9,7 @@
 
     <script src="/static/monitor/echarts.dataTool.min.js"></script>
 
-    <script src="/static/monitor/load_data.js"></script>
+    <script src="/static/monitor/load_data4.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,9 +40,9 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Summary</a></li>
+            <li><a href="/monitor/">Summary</a></li>
             <li><a href="/monitor/drill/">Drill Down Analysis</a></li>
-            <li><a href="/monitor/fillrate/">Fill Rate Analysis</a></li>
+            <li class="active"><a href="/monitor/fillrate/">Fill Rate Analysis</a></li>
             <li><a href="/monitor/config/">Config</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -55,56 +55,25 @@
 <div class="container">
     <div class="row">
     </div>
+    <div class="row row_line" style=" text-align: center;"><label class="input_label">Fill Rate Analysis </label></div>
     <div class="row row_line">
         <div class="col-md-12">
             <table class="table table-striped table-bordered" ng-controller="SimulationCtrl">
                 <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>#of shipments</th>
-                    <th>cost </th>
-                    <th>#11t</th>
-                    <th>#5t</th>
-                    <th>#1t</th>
-                    <th>11t truck gross fill rate</th>
-                    <th>5t truck gross fill rate</th>
-                    <th>1t truck gross fill rate</th>
-                    <th>11t truck net fill rate</th>
-                    <th>5t truck net fill rate</th>
-                    <th>1t truck net fill rate</th>
+                    <th>from name</th>
+                    <th>to name</th>
+                    <th>scenorio</th>
+                    <th>avg gross fill rate</th>
+                    <th>avg net fill rate</th>
                 </tr>
-                <tr ng-repeat="simulation in simulations">
-                    <td>{{ simulation.ID }}</td>
-                    <td>{{ simulation.DESC }}</td>
-                    <td>{{ simulation.SHIP }}</td>
-                    <td>{{ simulation.COST }}</td>
-                    <td>{{ simulation.t11 }}</td>
-                    <td>{{ simulation.t5 }}</td>
-                    <td>{{ simulation.t1 }}</td>
-                    <td>{{ simulation.t11_gross_fr }}</td>
-                    <td>{{ simulation.t5_gross_fr }}</td>
-                    <td>{{ simulation.t1_gross_fr }}</td>
-                    <td>{{ simulation.t11_net_fr }}</td>
-                    <td>{{ simulation.t5_net_fr }}</td>
-                    <td>{{ simulation.t1_net_fr }}</td>
+                <tr ng-repeat="tc in simulations">
+                    <td>{{ tc.fromname }}</td>
+                    <td>{{ tc.toname }}</td>
+                    <td>{{ tc.scenorio }}</td>
+                    <td>{{ tc.gross }}</td>
+                    <td>{{ tc.net }}</td>
                 </tr>
             </table>
-        </div>
-    </div>
-    <div class="row row_line">
-        <div class="col-md-6">
-            <div id="batch_size" style="width:100%;height:300px;"></div>
-        </div>
-        <div class="col-md-6">
-            <div id="kpi2" style="width:100%;height:300px;"></div>
-        </div>
-    </div>
-    <div class="row row_line">
-        <div class="col-md-6">
-            <div id="boxplot" style="width:100%;height:300px;"></div>
-        </div>
-        <div class="col-md-6">
-            <div id="boxplot_net" style="width:100%;height:300px;"></div>
         </div>
     </div>
 

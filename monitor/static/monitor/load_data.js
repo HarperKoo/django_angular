@@ -70,7 +70,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 },
                 tooltip: {},
                 legend: {
-                    data:['CNTR', '11t', '5t', '1t']
+                    data:[ '11t', '5t', '1t']
                 },
                 grid: {
                     left: '3%',
@@ -82,11 +82,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     data: simulation_names
                 },
                 yAxis: {},
-                series: [{
-                    name: 'CNTR',
-                    type: 'bar',
-                    data: CNTR
-                },
+                series: [
                     {
                         name: '11t',
                         type: 'bar',

@@ -95,9 +95,9 @@ def get_simulations(request):
 
 def read_csv_json(request):
     file_path = os.path.join(BASE_DIR, 'summary.csv')
-    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 'CNTR', 't11', 't5', 't1',
-                                                     'CNTR_gross_fr', 't11_gross_fr',
-                                                     't5_gross_fr', 't1_gross_fr', 'CNTR_net_fr', 't11_net_fr',
+    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'SHIP', 'COST', 't11', 't5', 't1',
+                                                     't11_gross_fr',
+                                                     't5_gross_fr', 't1_gross_fr',  't11_net_fr',
                                                      't5_net_fr', 't1_net_fr'])
     output = df.to_dict(orient='records')
     return HttpResponse(json.dumps({"simulations": output}, cls=DjangoJSONEncoder))
@@ -130,17 +130,13 @@ def read_csv_boxplot(request):
     return HttpResponse(json.dumps({"simulations": data}, cls=DjangoJSONEncoder))
 
 
-def read_boxplot(request):
-    boxplotList = BoxPlot.objects.all()
-
-
 def read_csv_json_drill(request):
     file_path = os.path.join(BASE_DIR, 'drill.csv')
     fromid = request.GET.get('fromid', '')
     toid = request.GET.get('toid', '')
-    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 'COST', 'CNTR', 't11', 't5', 't1',
-                                                     'CNTR_gross_fr', 't11_gross_fr',
-                                                          't5_gross_fr', 't1_gross_fr', 'CNTR_net_fr', 't11_net_fr',
+    df = pd.read_csv(file_path, skiprows=[0], names=['ID', 'DESC', 't11', 't5', 't1',
+                                                      't11_gross_fr',
+                                                          't5_gross_fr', 't1_gross_fr', 't11_net_fr',
                                                      't5_net_fr', 't1_net_fr', 'fromid', 'toid'])
     if fromid != '':
         df = df.loc[df['fromid'] == int(fromid)]
@@ -173,6 +169,20 @@ def from_to(request):
     return HttpResponse(json.dumps({"workplaces": idmap.to_dict(orient='records')}, cls=DjangoJSONEncoder))
 
 
+def fill_rate(request):
+    file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path2 = os.path.join(BASE_DIR, 'idmapping.csv')
+    df = pd.read_csv(file_path)
+    df2 = pd.read_csv(file_path2)
+    dfmean = df.groupby(['fromid','toid','scenorio']).agg({'gross':'mean','net':'mean'}).reset_index()
+    dfmeanlow = dfmean.loc[dfmean['gross']<0.3]
+    out1 = dfmeanlow.merge(df2,left_on='fromid',right_on='id').rename(index=str, columns={"name": "fromname"})
+    out2 = out1.merge(df2,left_on='toid',right_on='id').rename(index=str, columns={"name": "toname"})
+    out2 = out2[['fromid','toid','fromname','toname','scenorio','gross','net']]
+    out2 = out2.round({'gross': 2, 'net': 2}).sort_values(['scenorio','gross'])
+    return HttpResponse(json.dumps({"simulations": out2.to_dict(orient='records')}, cls=DjangoJSONEncoder))
+
+
 def get_conf(request):
     file_path = os.path.join(BASE_DIR, 'truckcapacity.csv')
     file_path2 = os.path.join(BASE_DIR, 'truckutil.csv')
@@ -194,6 +204,10 @@ def index2(request):
 
 def index3(request):
     return render_to_response('monitor/main3.html')
+
+
+def index4(request):
+    return render_to_response('monitor/main4.html')
 
 
 @csrf_exempt

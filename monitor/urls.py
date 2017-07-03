@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^drill/workplaces/$', views.from_to, name='workplaces'),
     url(r'^drill/drill_summary/$', views.read_csv_json_drill, name='drill_summary'),
     url(r'^config/config/$', views.get_conf, name='config'),
+    url(r'^fillrate/$', views.index4, name='index4'),
+    url(r'^fillrate/fillrate$', views.fill_rate, name='fillrate$'),
 ]

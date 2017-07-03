@@ -1,12 +1,13 @@
 var monitorApp = angular.module('monitorApp',[]);
 monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
+    $scope.hideme = false
     $http({
         url: 'workplaces',
         method: "GET",
         params: {tpid: 'fromid' }
     }).then(function (response) {
         $scope.list1 = response.data.workplaces;
-        $scope.val1 = String($scope.list1[0].id);
+        $scope.val1 = String($scope.list1[2].id);
         // $scope.val2setDoRefresh()
         $scope.val2set();
     });
@@ -22,6 +23,12 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             console.log('toid',$scope.val1)
             $scope.list2 = response.data.workplaces;
             $scope.val2 = String($scope.list2[0].id);
+            if($scope.val2 != "-1"){
+                $scope.hideme = true
+            }
+            else {
+                $scope.hideme = false
+            }
             $scope.doRefresh();
         });
     }
@@ -32,11 +39,17 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
     }
     $scope.doRefresh = function() {
         if (!$scope.val1 || !$scope.val2) return;
+        if($scope.val2 != "-1"){
+            $scope.hideme = true
+        }
+        else {
+            $scope.hideme = false
+        }
 
         console.log('Current select:', $scope.val1, $scope.val2);
 
         // 基于准备好的dom，初始化echarts实例
-        var batch_size_bar = echarts.init(document.getElementById('batch_size'));
+        // var batch_size_bar = echarts.init(document.getElementById('batch_size'));
         var KPI2_bar = echarts.init(document.getElementById('kpi2'));
         var $boxPlot = echarts.init(document.getElementById('boxplot'));
         var $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
@@ -44,7 +57,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         // var KPI3_bar = echarts.init(document.getElementById('kpi3'));
         // var KPI4_bar = echarts.init(document.getElementById('kpi4'));
 
-        batch_size_bar.showLoading();
+        // batch_size_bar.showLoading();
         KPI2_bar.showLoading();
         // KPI3_bar.showLoading();
         // KPI4_bar.showLoading();
@@ -58,14 +71,14 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 .then(function (response) {
                 $scope.simulations = response.data.simulations;
                 simulation_names = [];
-                batch_size = [];
+                // batch_size = [];
                 CNTR = [];
                 t11 = [];
                 t5 = [];
                 t1 = [];
                 for (var i = 0; i < $scope.simulations.length; i++) {
                     simulation_names.push($scope.simulations[i].ID)
-                    batch_size.push($scope.simulations[i].COST)
+                    // batch_size.push($scope.simulations[i].COST)
                     CNTR.push($scope.simulations[i].CNTR)
                     t11.push($scope.simulations[i].t11)
                     t5.push($scope.simulations[i].t5)
@@ -74,32 +87,32 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
 
 
                 // 指定图表的配置项和数据
-                var batch_size_option = {
-                    title: {
-                        text: 'COST'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['Batch Size']
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: {
-                        // data: ["test1","test2"]
-                        data: simulation_names
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: 'cost',
-                        type: 'bar',
-                        data: batch_size
-                        // data: [40.0000,20.3,70.0000]
-                    }]
-                };
+                // var batch_size_option = {
+                //     title: {
+                //         text: 'COST'
+                //     },
+                //     tooltip: {},
+                //     legend: {
+                //         data: ['Batch Size']
+                //     },
+                //     grid: {
+                //         left: '3%',
+                //         right: '4%',
+                //         bottom: '3%',
+                //         containLabel: true
+                //     },
+                //     xAxis: {
+                //         // data: ["test1","test2"]
+                //         data: simulation_names
+                //     },
+                //     yAxis: {},
+                //     series: [{
+                //         name: 'cost',
+                //         type: 'bar',
+                //         data: batch_size
+                //         // data: [40.0000,20.3,70.0000]
+                //     }]
+                // };
 
                 // 指定图表的配置项和数据
                 var kpi2_option = {
@@ -108,7 +121,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     },
                     tooltip: {},
                     legend: {
-                        data: ['CNTR', '11t', '5t', '1t']
+                        data: ['11t', '5t', '1t']
                     },
                     grid: {
                         left: '3%',
@@ -120,11 +133,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                         data: simulation_names
                     },
                     yAxis: {},
-                    series: [{
-                        name: 'CNTR',
-                        type: 'bar',
-                        data: CNTR
-                    },
+                    series: [
                         {
                             name: '11t',
                             type: 'bar',
@@ -199,12 +208,12 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                     ]
                 };
 
-                batch_size_bar.hideLoading();
+                // batch_size_bar.hideLoading();
                 KPI2_bar.hideLoading();
                 // KPI3_bar.hideLoading();
                 // KPI4_bar.hideLoading();
                 // 使用刚指定的配置项和数据显示图表。
-                batch_size_bar.setOption(batch_size_option);
+                // batch_size_bar.setOption(batch_size_option);
                 KPI2_bar.setOption(kpi2_option);
                 // KPI3_bar.setOption(kpi3_option);
                 // KPI4_bar.setOption(throughput_option);
