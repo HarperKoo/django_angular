@@ -139,6 +139,7 @@ def draw_network(request):
     out1 = df.merge(df2,left_on='fromid',right_on='id').rename(index=str, columns={"name": "fromname","type":"fromtype"})
     out2 = out1.merge(df2,left_on='toid',right_on='id').rename(index=str, columns={"name": "toname","type":"totype"})
     out2 = out2[['truck','fromid','toid','fromname','toname','fromtype','totype','scenorio','gross','net']]
+    out2 = out2.loc[out2['toid'] != -1]
     dfs11 = out2.loc[out2['scenorio'] == scenorio]
     dfs11 = dfs11.groupby(['fromid','toid','fromtype','totype','fromname','toname']).agg({
      'scenorio':'count'}).reset_index()
@@ -183,7 +184,9 @@ def draw_network(request):
     edges['id'] = edges.groupby(['index']).cumcount()+1
     edges['id'] = edges['id'].apply(lambda x: 'e'+repr(x))
     edges = edges.drop('index', 1)
-    edges['size'] = edges['size'].apply(lambda x: np.log(x)/3)
+    # edges['size'] = edges['size'].apply(lambda x: np.log(x))
+    edges['size'] = edges['size'].apply(lambda x: x/100)
+    edges['color'] = '#ccc'
     edges_dict = edges.to_dict(orient='records')
     return HttpResponse(json.dumps({"nodes": dfs11_from2, "edges":edges_dict}, cls=DjangoJSONEncoder))
 

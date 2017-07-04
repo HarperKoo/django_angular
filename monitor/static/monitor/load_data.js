@@ -306,7 +306,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         $http({
             url: 'network',
             method: "GET",
-            params: {scenorio: 'S1-1'}
+            params: {scenorio: 'Actual'}
         }).then(function(response){
             $scope.g = response.data;
             // Instantiate sigma:
@@ -333,8 +333,8 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 graph: $scope.g,
                 container: 'sigmas12',
                 settings: {
-                    minEdgeSize: 0.1,
-                    maxEdgeSize: 3,
+                    minEdgeSize: 0,
+                    maxEdgeSize: 10,
                     defaultNodeColor: '#ec5148'
                 }
 
