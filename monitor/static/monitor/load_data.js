@@ -315,7 +315,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 container: 'sigmas11',
                 settings: {
                     minEdgeSize: 0,
-                    maxEdgeSize: 10,
+                    maxEdgeSize: 3,
                     defaultNodeColor: '#ec5148'
                 }
 
