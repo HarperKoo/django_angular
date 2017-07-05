@@ -17,9 +17,17 @@
 }
 
 .input_label {
-    padding: 6px 12px;
+     padding: 6px 12px;
+     font-size: 18px;
+ }
+
+.input_title {
+    padding: 0px 0px;
     font-size: 18px;
+    margin: 0;
+    font-weight: normal;
 }
+
 
 .row_line {
     margin-bottom: 20px;

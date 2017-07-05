@@ -38,7 +38,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
             // 指定图表的配置项和数据
             var batch_size_option = {
                 title: {
-                    text: 'COST'
+                    text: 'COST (1million won)'
                 },
                 tooltip: {},
                 legend: {
@@ -171,7 +171,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         $http({
             url: 'boxplot',
             method: "GET",
-            params: {tp: 'gross'}
+            params: {tp: 'gross', ex_type: 'CNTR'}
         }).then(function(response){
             $boxPlot.dispose()
             $boxPlot = echarts.init(document.getElementById('boxplot'));
@@ -238,7 +238,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
         $http({
             url: 'boxplot',
             method: "GET",
-            params: {tp: 'net'}
+            params: {tp: 'net', ex_type: 'CNTR'}
         }).then(function(response){
             $boxplot_net.dispose()
             $boxplot_net = echarts.init(document.getElementById('boxplot_net'));
@@ -315,7 +315,7 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 container: 'sigmas11',
                 settings: {
                     minEdgeSize: 0,
-                    maxEdgeSize: 3,
+                    maxEdgeSize: 10,
                     defaultNodeColor: '#ec5148'
                 }
 
@@ -334,8 +334,10 @@ monitorApp.controller('SimulationCtrl', function SimulationCtrl($scope,$http){
                 container: 'sigmas12',
                 settings: {
                     minEdgeSize: 0,
-                    maxEdgeSize: 10,
-                    defaultNodeColor: '#ec5148'
+                    maxEdgeSize: 14,
+                    defaultNodeColor: '#ec5148',
+                    // zoomingRatio: 1,
+                    // doubleClickEnabled: false
                 }
 
             });

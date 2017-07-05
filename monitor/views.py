@@ -99,6 +99,7 @@ def read_csv_json(request):
                                                      't11_gross_fr',
                                                      't5_gross_fr', 't1_gross_fr',  't11_net_fr',
                                                      't5_net_fr', 't1_net_fr'])
+    df['COST'] = df['COST'].apply(lambda x: int(int(x)/1000000))
     output = df.to_dict(orient='records')
     return HttpResponse(json.dumps({"simulations": output}, cls=DjangoJSONEncoder))
 
@@ -107,12 +108,15 @@ def read_csv_boxplot(request):
     tp = request.GET.get('tp', 'gross')
     fromid = request.GET.get('fromid', '')
     toid = request.GET.get('toid', '')
+    ex_type = request.GET.get('ex_type', '')
     file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
     df = pd.read_csv(file_path)
     if fromid != '':
         df = df.loc[df['fromid'] == int(fromid)]
     if toid != '':
         df = df.loc[df['toid'] == int(toid)]
+    if ex_type != '':
+        df = df.loc[df['truck'] != ex_type]
     data = []
     trucks = sorted(df.truck.unique())
     data.append(trucks)
@@ -132,7 +136,7 @@ def read_csv_boxplot(request):
 
 def draw_network(request):
     scenorio = request.GET.get('scenorio', 'S1-1')
-    file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path = os.path.join(BASE_DIR, 'boxplot.csv')
     file_path2 = os.path.join(BASE_DIR, 'idmapping.csv')
     df2 = pd.read_csv(file_path2)
     df = pd.read_csv(file_path)
