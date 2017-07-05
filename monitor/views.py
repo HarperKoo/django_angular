@@ -109,7 +109,7 @@ def read_csv_boxplot(request):
     fromid = request.GET.get('fromid', '')
     toid = request.GET.get('toid', '')
     ex_type = request.GET.get('ex_type', '')
-    file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path = os.path.join(BASE_DIR, 'boxplot_demo.csv')
     df = pd.read_csv(file_path)
     if fromid != '':
         df = df.loc[df['fromid'] == int(fromid)]
@@ -136,7 +136,7 @@ def read_csv_boxplot(request):
 
 def draw_network(request):
     scenorio = request.GET.get('scenorio', 'S1-1')
-    file_path = os.path.join(BASE_DIR, 'boxplot.csv')
+    file_path = os.path.join(BASE_DIR, 'boxplot_demo.csv')
     file_path2 = os.path.join(BASE_DIR, 'idmapping.csv')
     df2 = pd.read_csv(file_path2)
     df = pd.read_csv(file_path)
@@ -216,7 +216,7 @@ def from_to(request):
     tpid = request.GET.get('tpid', 'fromid')
     fromid = request.GET.get('fromid', '34')
     file_path = os.path.join(BASE_DIR, 'drill.csv')
-    file_path2 = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path2 = os.path.join(BASE_DIR, 'boxplot_demo.csv')
     file_path3 = os.path.join(BASE_DIR, 'idmapping.csv')
     df2 = pd.read_csv(file_path2)
     df = pd.read_csv(file_path)
@@ -235,7 +235,7 @@ def from_to(request):
 
 
 def fill_rate(request):
-    file_path = os.path.join(BASE_DIR, 'boxplot_1_1.csv')
+    file_path = os.path.join(BASE_DIR, 'boxplot_demo.csv')
     file_path2 = os.path.join(BASE_DIR, 'idmapping.csv')
     df = pd.read_csv(file_path)
     df2 = pd.read_csv(file_path2)
